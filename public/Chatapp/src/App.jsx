@@ -3,6 +3,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Chat from "./pages/Chat";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (

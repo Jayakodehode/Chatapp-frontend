@@ -4,71 +4,71 @@ import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function Register() {
-  const { values, setValues } = useState({
+  const [values, setValues] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 5000,
+    pauseOnHover: true,
+    theme: "light",
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    handleValidation();
   };
   const handleValidation = () => {
     const { password, confirmPassword, username, email } = values;
     if (password != confirmPassword) {
-      toast.error("password and confirm password should be same", {
-        position: "bottom-right",
-        autoClose: 8000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "light",
-      });
+      toast.error("Password and confrim password should be same", toastOptions);
     }
   };
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
   return (
-    <FormContainer>
-      <form onSubmit={(event) => handleSubmit(event)}>
-        <div className="logo">
-          <h1>Chatapp</h1>
-        </div>
-        <input
-          type="text"
-          name="Username"
-          id=""
-          placeholder="Username"
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="email"
-          name="Email"
-          id=""
-          placeholder="Email ID"
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="password"
-          name="Password"
-          id=""
-          placeholder="Password"
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="password"
-          name="Password"
-          id=""
-          placeholder=" Confirm Password"
-          onChange={(e) => handleChange(e)}
-        />
-        <button type="submit">Create User</button>
-        <span>
-          Already have an account <Link to="/login">Login</Link>
-        </span>
-      </form>
+    <>
+      <FormContainer>
+        <form onSubmit={(event) => handleSubmit(event)}>
+          <div className="logo">
+            <h1>Chatapp</h1>
+          </div>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            onChange={(e) => handleChange(e)}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email ID"
+            onChange={(e) => handleChange(e)}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={(e) => handleChange(e)}
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder=" Confirm Password"
+            onChange={(e) => handleChange(e)}
+          />
+          <button type="submit">Create User</button>
+          <span>
+            Already have an account <Link to="/login">Login</Link>
+          </span>
+        </form>
+      </FormContainer>
       <ToastContainer />
-    </FormContainer>
+    </>
   );
 }
 const FormContainer = styled.div`
