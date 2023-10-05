@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { registerRoute } from "../utils/APIRoute";
+
 export default function Register() {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -17,15 +21,59 @@ export default function Register() {
     theme: "light",
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    handleValidation();
+    if (handleValidation()) {
+      try {
+        const { password, confirmPassword, username, email } = values;
+        const { data } = await axios.post(registerRoute, {
+          username,
+          email,
+          password,
+        });
+
+        if (data.status === false) {
+          toast.error(data.msg, toastOptions);
+        } else if (data.status === true) {
+          localStorage.setItem("Chat-app-user", JSON.stringify(data.user));
+          navigate("/"); // Navigate after successful registration
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+    /* if (handleValidation()) {
+      const { password, confirmPassword, username, email } = values;
+      const { data } = await axios.post(registerRoute, {
+        username,
+        email,
+        password,
+      });
+    }
+    if (data.status === false) {
+      toast.error(data.msg, toastOptions);
+    }
+    if (data.status === true) {
+      localStorage.setItem("Chat-app-user", JSON.stringify(data.user));
+    }
+    navigate("/");*/
   };
+
+  // function to validate the details given in the form registration
   const handleValidation = () => {
     const { password, confirmPassword, username, email } = values;
     if (password != confirmPassword) {
       toast.error("Password and confrim password should be same", toastOptions);
-    }
+    } else if (password.length < 8) {
+      toast.error("Password should contain atleast 8 letters", toastOptions);
+      return false;
+    } else if (username.length < 4) {
+      toast.error("Username should contain atleast 4 letters", toastOptions);
+      return false;
+    } else if (email === "") {
+      toast.error("Enter your emailid", toastOptions);
+      return false;
+    } else return true;
   };
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
