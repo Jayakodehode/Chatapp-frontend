@@ -4,7 +4,6 @@ import Login from "./Login";
 import Chat from "./Chat";
 
 import "./App.css";
-import MainLayout from "./pages/Mainlayout";
 
 function App() {
   return (
