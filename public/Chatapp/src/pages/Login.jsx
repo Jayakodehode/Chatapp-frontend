@@ -89,7 +89,7 @@ export default function Login() {
           <button type="submit">Login</button>
           <span>
             Don't have an account, register here{" "}
-            <Link to="/register">Signup</Link>
+            <Link to="/Chat-app/register">Signup</Link>
           </span>
         </form>
       </FormContainer>
