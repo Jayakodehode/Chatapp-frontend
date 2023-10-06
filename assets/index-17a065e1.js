@@ -149,4 +149,4 @@ Error generating stack: `+i.message+`
       background-color: #483e1e;
     }
   }
-`;function Ev(){return z.jsx("div",{children:"Chat"})}function kv(){return z.jsxs(Rp,{children:[z.jsx(Ar,{path:"/Chat-app/register",element:z.jsx(yv,{})}),z.jsx(Ar,{path:"/Chat-app/login",element:z.jsx(wv,{})}),z.jsx(Ar,{path:"/Chat-app/",element:z.jsx(Ev,{})})]})}function Cv(){return z.jsx(Ug,{children:z.jsx(Rp,{children:z.jsx(Ar,{path:"/Chat-app/*",element:z.jsx(kv,{})})})})}Xl.createRoot(document.getElementById("root")).render(z.jsx(M.StrictMode,{children:z.jsx(Cv,{})}));
+`;function Ev(){return z.jsx("div",{children:"Chat"})}function kv(){return z.jsxs(Rp,{children:[z.jsx(Ar,{path:"/register",element:z.jsx(yv,{})}),z.jsx(Ar,{path:"/login",element:z.jsx(wv,{})}),z.jsx(Ar,{path:"/",element:z.jsx(Ev,{})})]})}function Cv(){return z.jsx(Ug,{children:z.jsx(Rp,{children:z.jsx(Ar,{path:"/Chat-app/*",element:z.jsx(kv,{})})})})}Xl.createRoot(document.getElementById("root")).render(z.jsx(M.StrictMode,{children:z.jsx(Cv,{})}));
