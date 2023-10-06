@@ -149,4 +149,4 @@ Error generating stack: `+i.message+`
       background-color: #483e1e;
     }
   }
-`;function Ev(){return z.jsx("div",{children:"Chat"})}function kv(){return z.jsx(Ug,{children:z.jsxs(zg,{children:[z.jsx(Qo,{path:"/Chat-app/register",element:z.jsx(yv,{})}),z.jsx(Qo,{path:"/Chat-app/login",element:z.jsx(wv,{})}),z.jsx(Qo,{path:"/Chat-app/",element:z.jsx(Ev,{})})]})})}Xl.createRoot(document.getElementById("root")).render(z.jsx(M.StrictMode,{children:z.jsx(kv,{})}));
+`;function Ev(){return z.jsx("div",{children:"Chat"})}function kv(){return z.jsx(Ug,{children:z.jsxs(zg,{children:[z.jsx(Qo,{path:"/Chat-app/register",element:z.jsx(yv,{})}),z.jsx(Qo,{path:"/Chat-app/",element:z.jsx(wv,{})}),z.jsx(Qo,{path:"/Chat-app/login",element:z.jsx(Ev,{})})]})})}Xl.createRoot(document.getElementById("root")).render(z.jsx(M.StrictMode,{children:z.jsx(kv,{})}));
