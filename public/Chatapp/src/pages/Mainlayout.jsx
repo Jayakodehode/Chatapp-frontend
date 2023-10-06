@@ -7,9 +7,9 @@ import Chat from "./Chat";
 function MainLayout() {
   return (
     <Routes>
-      <Route path="/Chat-app/register" element={<Register />} />
-      <Route path="/Chat-app/login" element={<Login />} />
-      <Route path="/Chat-app/" element={<Chat />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Chat />} />
     </Routes>
   );
 }
