@@ -1,17 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Chat from "./pages/Chat";
+
 import "./App.css";
-import { ToastContainer } from "react-toastify";
+import MainLayout from "./pages/Mainlayout";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/Chat-app/register" element={<Register />} />
-        <Route path="/Chat-app/" element={<Login />} />
-        <Route path="/Chat-app/login" element={<Chat />} />
+        <Route path="/Chat-app/*" element={<MainLayout />} />
       </Routes>
     </BrowserRouter>
   );
