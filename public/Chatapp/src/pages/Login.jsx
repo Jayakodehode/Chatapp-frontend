@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { ToastContainer, toast } from "react-toastify";
+import styled from "styled-components"; // to style
+import { ToastContainer, toast } from "react-toastify"; //Toastify uses to show the errors
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
+import axios from "axios"; //axios uses to call the apis
 import { registerRoute } from "../utils/APIRoute";
 
 export default function Login() {
@@ -14,6 +14,8 @@ export default function Login() {
     password: "",
     confirmPassword: "",
   });
+
+  //here we are specifying how error will shown up
   const toastOptions = {
     position: "bottom-right",
     autoClose: 5000,
@@ -42,21 +44,6 @@ export default function Login() {
         console.error("Error:", error);
       }
     }
-    /* if (handleValidation()) {
-      const { password, confirmPassword, username, email } = values;
-      const { data } = await axios.post(registerRoute, {
-        username,
-        email,
-        password,
-      });
-    }
-    if (data.status === false) {
-      toast.error(data.msg, toastOptions);
-    }
-    if (data.status === true) {
-      localStorage.setItem("Chat-app-user", JSON.stringify(data.user));
-    }
-    navigate("/");*/
   };
 
   // function to validate the details given in the form registration
