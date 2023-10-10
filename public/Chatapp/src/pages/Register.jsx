@@ -25,7 +25,7 @@ export default function Register() {
     event.preventDefault();
     if (handleValidation()) {
       try {
-        const { password, confirmPassword, username, email } = values;
+        const { password, username, email } = values;
         const { data } = await axios.post(registerRoute, {
           username,
           email,
@@ -78,6 +78,7 @@ export default function Register() {
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
+
   return (
     <>
       <FormContainer>
@@ -111,7 +112,7 @@ export default function Register() {
           />
           <button type="submit">Create User</button>
           <span>
-            Already have an account <Link to="/Chat-app/login">Login</Link>
+            Already have an account <Link to="/login">Login</Link>
           </span>
         </form>
       </FormContainer>

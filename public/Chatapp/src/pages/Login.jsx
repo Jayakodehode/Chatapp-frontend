@@ -4,15 +4,13 @@ import styled from "styled-components"; // to style
 import { ToastContainer, toast } from "react-toastify"; //Toastify uses to show the errors
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios"; //axios uses to call the apis
-import { registerRoute } from "../utils/APIRoute";
+import { loginRoute } from "../utils/APIRoute";
 
 export default function Login() {
   const navigate = useNavigate();
   const [values, setValues] = useState({
     username: "",
-    email: "",
     password: "",
-    confirmPassword: "",
   });
 
   //here we are specifying how error will shown up
@@ -27,17 +25,16 @@ export default function Login() {
     event.preventDefault();
     if (handleValidation()) {
       try {
-        const { password, confirmPassword, username, email } = values;
-        const { data } = await axios.post(registerRoute, {
+        const { password, username } = values;
+        const { data } = await axios.post(loginRoute, {
           username,
-          email,
           password,
         });
 
         if (data.status === false) {
           toast.error(data.msg, toastOptions);
         } else if (data.status === true) {
-          localStorage.setItem("Chat-app-user", JSON.stringify(data.user));
+          localStorage.getItem("Chat-app-user", JSON.stringify(data.user));
           navigate("/"); // Navigate after successful registration
         }
       } catch (error) {
@@ -48,19 +45,15 @@ export default function Login() {
 
   // function to validate the details given in the form registration
   const handleValidation = () => {
-    const { password, confirmPassword, username, email } = values;
-    if (password != confirmPassword) {
-      toast.error("Password and confrim password should be same", toastOptions);
-    } else if (password.length < 8) {
-      toast.error("Password should contain atleast 8 letters", toastOptions);
+    const { password, username } = values;
+    if (password == "") {
+      toast.error("Username and password is required", toastOptions);
       return false;
-    } else if (username.length < 4) {
-      toast.error("Username should contain atleast 4 letters", toastOptions);
+    } else if (username.length === "") {
+      toast.error("username and password is required ", toastOptions);
       return false;
-    } else if (email === "") {
-      toast.error("Enter your emailid", toastOptions);
-      return false;
-    } else return true;
+    }
+    return true;
   };
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -74,9 +67,9 @@ export default function Login() {
           </div>
 
           <input
-            type="email"
-            name="email"
-            placeholder="Email ID"
+            type="text"
+            name="username"
+            placeholder="Username"
             onChange={(e) => handleChange(e)}
           />
           <input
@@ -89,7 +82,7 @@ export default function Login() {
           <button type="submit">Login</button>
           <span>
             Don't have an account, register here{" "}
-            <Link to="/Chat-app/register">Signup</Link>
+            <Link to="/register">Signup</Link>
           </span>
         </form>
       </FormContainer>

@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -7,11 +8,11 @@ import "./App.css";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Chat-app">
       <Routes>
-        <Route path=" /Chat-app/register" element={<Register />} />
-        <Route path=" /Chat-app/login" element={<Login />} />
-        <Route path=" /Chat-app/" element={<Chat />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Chat />} />
       </Routes>
     </BrowserRouter>
   );
