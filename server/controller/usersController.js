@@ -1,33 +1,38 @@
 const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
 module.exports.register = async (req, res, next) => {
+  console.log(req.body);
   try {
     const { username, email, password } = req.body;
 
     // Perform validation here (e.g., check if required fields are provided)
     const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res
-        .status(400)
-        .json({ message: "User with this email already exists." });
+      return res.json({
+        message: "User with this email already exists.",
+        status: false,
+      });
     }
     // Check if the user with the same email already exists
     const existingEmail = await User.findOne({ email });
     if (existingEmail) {
-      return res
-        .status(400)
-        .json({ message: "User with this email already exists." });
+      return res.json({
+        message: "User with this email already exists.",
+        status: false,
+      });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     // Create a new user in the database
-    const newUser = new User({
+    const newUser = await User.create({
       username,
       email,
       password: hashedPassword, // You should hash the password before saving it to the database
     });
     delete newUser.password;
-
-    await newUser.save();
+    console.log("Data to be returned:", {
+      message: "User registered successfully.",
+      newUser,
+    });
 
     // Respond with a success message or token, depending on your authentication system
     return res
