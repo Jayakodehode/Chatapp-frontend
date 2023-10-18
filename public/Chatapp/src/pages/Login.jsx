@@ -34,7 +34,8 @@ export default function Login() {
         if (data.status === false) {
           toast.error(data.msg, toastOptions);
         } else if (data.status === true) {
-          localStorage.getItem("Chat-app-user", JSON.stringify(data.user));
+          localStorage.setItem("Chat-app-user", JSON.stringify(data.user));
+          console.log(data.user);
           navigate("/"); // Navigate after successful login
         }
       } catch (error) {

@@ -17,7 +17,6 @@
   width: 85vw;
   display: grid;
   grid-template-columns: 25%, 75%;
-  justify-content: center;
-  align-items: center;
+
   background-color: var(--maindarkcolor);
 }

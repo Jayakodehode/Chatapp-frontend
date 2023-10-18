@@ -21,7 +21,8 @@ export default function SetAvatar() {
     theme: "light",
   };
   useEffect(() => {
-    if (localStorage.getItem("Chat-app-user")) {
+    const user = JSON.parse(localStorage.getItem("Chat-app-user"));
+    if (user && user.isAvatarImageSet) {
       navigate("/");
     }
   }, []);
@@ -29,13 +30,19 @@ export default function SetAvatar() {
     if (selectedAvatar === undefined) {
       toast.error("Please select an avatar", toastOptions);
     } else {
+      let data;
       try {
         const user = JSON.parse(localStorage.getItem("Chat-app-user"));
-        const { data } = await axios.get(`${setAvatarRoute}/${user._id}`, {
-          params: { image: avatars[selectedAvatar] },
-        });
-        console.log(data);
-        if (data.isSet) {
+        console.log(user);
+
+        if (user) {
+          // Check if user is defined
+          ({ data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
+            image: avatars[selectedAvatar],
+          }));
+        }
+        console.log("Received data:", data);
+        if (data && data.isSet) {
           user.isAvatarImageSet = true;
           user.avatarImage = data.image;
           localStorage.setItem("Chat-app-user", JSON.stringify(user));
@@ -57,6 +64,7 @@ export default function SetAvatar() {
         try {
           const image = await axios.get(
             `${api}/${Math.round(Math.random() * 1000)}`
+            //it will generate random numbers with will get different images
           );
           const buffer = Buffer.from(image.data);
           data.push(buffer.toString("base64"));
