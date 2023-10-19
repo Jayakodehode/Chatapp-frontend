@@ -74,6 +74,7 @@ module.exports.getAllUsers = async (req, res, next) => {
   }
 };
 module.exports.setAvatar = async (req, res, next) => {
+  console.log(req.body);
   try {
     const userId = req.params.id;
     const avatarImage = req.body.image;
@@ -85,6 +86,8 @@ module.exports.setAvatar = async (req, res, next) => {
       },
       { new: true }
     );
+    console.log(userId);
+    console.log(userData);
     return res.json({
       isSet: userData.isAvatarImageSet,
       image: userData.avatarImage,

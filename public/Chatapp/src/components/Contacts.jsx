@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-export default function Contacts({ contacts, currentUser }) {
+export default function Contacts({ contacts, currentUser, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrenrUserImage] = useState(undefined);
   const [currentSelectedChat, setCurrentSelectedChat] = useState(undefined);
@@ -10,6 +10,10 @@ export default function Contacts({ contacts, currentUser }) {
       setCurrentUserName(currentUser.username);
     }
   }, [currentUser]);
+  const changeCurrentChat = (index, contact) => {
+    setCurrentSelectedChat(index);
+    changeChat(contact);
+  };
 
   return (
     <>
@@ -26,6 +30,7 @@ export default function Contacts({ contacts, currentUser }) {
                     index === currentSelectedChat ? "selected" : ""
                   }`}
                   key={index}
+                  onClick={() => changeCurrentChat(index, contact)}
                 >
                   <div className="avatar">
                     <img
