@@ -2,8 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import Logout from "./Logout";
 import ChatInput from "./ChatInput";
+import ChatMessages from "./ChatMessages";
+import axios from "axios";
+import { sendMessageRoute } from "../utils/APIRoute";
 export default function ChatContainer({ currentChat }) {
-  const handleSendMsg = async (msg) => {};
+  const handleSendMsg = async (msg) => {
+    alert(msg);
+  };
   return (
     <>
       {currentChat && (
@@ -22,7 +27,7 @@ export default function ChatContainer({ currentChat }) {
             </div>
             <Logout />
           </div>
-          <div className="chat-messages"></div>
+          <ChatMessages />
           <ChatInput handleSendMsg={handleSendMsg} />
         </Container>
       )}
@@ -30,7 +35,7 @@ export default function ChatContainer({ currentChat }) {
   );
 }
 const Container = styled.div`
-  padding-top: 2rem;
+  padding: 2rem;
   .chat-header {
     display: flex;
     justify-content: space-between;
