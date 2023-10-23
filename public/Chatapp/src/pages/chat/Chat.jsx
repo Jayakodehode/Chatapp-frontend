@@ -66,7 +66,10 @@ export default function Chat() {
             {isLoaded && currentChat === undefined ? (
               <Welcome currentUser={currentUser} />
             ) : (
-              <ChatContainer currentChat={currentChat} />
+              <ChatContainer
+                currentChat={currentChat}
+                currentUser={currentUser}
+              />
             )}
           </div>
         </div>
@@ -91,8 +94,15 @@ const MainContainer = styled.div`
       height: 85vh;
       width: 85vw;
       display: grid;
-      grid-template-columns: 25% 75%; /* Fix the percentage values */
+      grid-template-columns: 25% 75%;
       background-color: var(--maindarkcolor);
+    }
+  }
+  @media screen and (min-width: 720px) and (max-width: 1050px) {
+    .container {
+      .chat-container {
+        grid-template-columns: 35% 65%;
+      }
     }
   }
 `;

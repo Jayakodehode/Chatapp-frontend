@@ -66,6 +66,12 @@ const Container = styled.div`
   grid-template-rows: 10% 75% 15%;
   overflow:hidden;
   background-color: var(--maindarkcolor);
+  .logo{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:var(--lightchatbg);
+  }
   .contacts {
     display: flex;
     flex-direction: column;
@@ -90,6 +96,7 @@ const Container = styled.div`
       display: flex;
       gap: 1rem;
       align-items: center;
+     
       transition: 0.5s ease-in-out;
       .avatar {
         img {
@@ -103,7 +110,9 @@ const Container = styled.div`
       }
     }
     .selected {
-      background-color: #9a86f3;
+      background-color: var(--maindarkcolor);
+      border:3px solid var(--mainlightcolor);
+      border-radius:1rem;
     }
   }
 
@@ -123,5 +132,22 @@ const Container = styled.div`
       h2 {
         color: white;
       }
+    }
+    @media screen and (min-width:720px)and(max-width:1050px){
+     .contacts{
+      .contact{
+        gap:.5rem;
+        .avatar {
+          img {
+            height: 1rem;
+          }
+        }
+        .username {
+          h3 {
+           font-size:1rem;
+          }
+        }
+      }
+     }
     }
 `;

@@ -26,4 +26,12 @@ const Container = styled.div`
     font-size: 2rem;
     color: var(--mainlightcolor);
   }
+  @media screen and (min-width: 720px) and (max-width: 1050px) {
+    h1 {
+      font-size: 3rem;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
 `;

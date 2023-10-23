@@ -1,19 +1,24 @@
 const mongoose = require("mongoose");
 
-const messageSchema = new mongoose.Schema({
-  message: {
-    text: {
-      typr: String,
+const messageSchema = new mongoose.Schema(
+  {
+    message: {
+      text: {
+        type: String,
+        required: true,
+      },
+    },
+    users: Array,
+
+    sender: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
       required: true,
     },
   },
-  users: Array,
-  sende: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
-    required: true,
-  },
+  {
+    timestamps: true,
+  }
+);
 
-  timestamps: true,
-});
-module.exports = mongoose.model("messages", messageSchema);
+module.exports = mongoose.model("Messages", messageSchema); // Typically, model names are singular and start with an uppercase letter
