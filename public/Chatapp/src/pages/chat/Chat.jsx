@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import style from "./chat.module.css";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { allUsersRoute } from "../../utils/APIRoute";
+import { allUsersRoute, host } from "../../utils/APIRoute";
 import Contacts from "../../components/Contacts";
 import Welcome from "../../components/Welcome";
 import ChatContainer from "../../components/ChatContainer";
+import { io } from "socket.io-client";
 
 export default function Chat() {
+  const socket = useRef();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -26,7 +28,13 @@ export default function Chat() {
 
     fetchData();
   }, []);
-
+  //this useeffect hook makes a connection whenever user is changed
+  useEffect(() => {
+    if (currentUser) {
+      socket.current = io(host);
+      socket.current.emit("add-user", currentUser._id);
+    }
+  }, [currentUser]);
   useEffect(() => {
     const fetchContacts = async () => {
       if (currentUser) {
@@ -69,6 +77,7 @@ export default function Chat() {
               <ChatContainer
                 currentChat={currentChat}
                 currentUser={currentUser}
+                socket={socket}
               />
             )}
           </div>

@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Logout from "./Logout";
 import ChatInput from "./ChatInput";
-
 import axios from "axios";
 import { sendMessageRoute } from "../utils/APIRoute";
 import { getAllMessagesRoute } from "../utils/APIRoute";
-export default function ChatContainer({ currentChat, currentUser }) {
+import { v4 as uuidv4 } from "uuid";
+
+export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const scrollRef = useRef();
 
   useEffect(() => {
     async function fetchMessages() {
@@ -34,7 +37,32 @@ export default function ChatContainer({ currentChat, currentUser }) {
       to: currentChat._id,
       message: msg,
     });
+    socket.current.emit("send-msg", {
+      from: currentUser._id,
+      to: currentChat._id,
+      message: msg,
+    });
+    let msgs = [...messages];
+    msgs.push({ fromself: true, message: msg });
+    setMessages(msgs);
   };
+  //this useeffect runs first time when component is loaded
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("msg-receive", (msg) => {
+        setArrivalMessage({ fromself: false, message: msg });
+        //here fromSelf:false because we are receving messages
+      });
+    }
+  }, []);
+  //this useEffect will run everytime when there is new Arrival message
+  useEffect(() => {
+    arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behaviour: "smooth" });
+  }, [messages]);
   return (
     <>
       {currentChat && (
@@ -57,7 +85,7 @@ export default function ChatContainer({ currentChat, currentUser }) {
             {messages.map((message) => {
               return (
                 <div
-                  key={message._id}
+                  key={uuidv4()}
                   className={`message ${
                     message.fromself ? "sended" : "received"
                   }`}
