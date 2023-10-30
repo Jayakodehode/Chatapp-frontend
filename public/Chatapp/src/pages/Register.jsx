@@ -16,7 +16,7 @@ export default function Register() {
   });
   useEffect(() => {
     if (localStorage.getItem("Chat-app-user")) {
-      navigate("/");
+      navigate("/Chat-app/");
     }
   }, []);
   const toastOptions = {
@@ -43,7 +43,7 @@ export default function Register() {
           toast.error(data.msg, toastOptions);
         } else if (data.status === true) {
           localStorage.setItem("Chat-app-user", JSON.stringify(data.user));
-          navigate("/"); // Navigate after successful login
+          navigate("/Chat-app/"); // Navigate after successful login
         }
       }
     } catch (error) {

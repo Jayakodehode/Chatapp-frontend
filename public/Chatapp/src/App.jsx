@@ -9,12 +9,12 @@ import "./App.css";
 
 function App() {
   return (
-    <BrowserRouter basename="/Chat-app">
+    <BrowserRouter>
       <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/setAvatar" element={<SetAvatar />} />
-        <Route path="/" element={<Chat />} />
+        <Route path="/Chat-app/register" element={<Register />} />
+        <Route path="/Chat-app/login" element={<Login />} />
+        <Route path="/Chat-app/setAvatar" element={<SetAvatar />} />
+        <Route path="/Chat-app/" element={<Chat />} />
       </Routes>
     </BrowserRouter>
   );
