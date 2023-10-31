@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://jayakodehode.github.io/Chatapp-frontend/",
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
