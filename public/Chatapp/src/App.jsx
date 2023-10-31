@@ -11,10 +11,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/Chat-app/register" element={<Register />} />
-        <Route path="/Chat-app/login" element={<Login />} />
-        <Route path="/Chat-app/setAvatar" element={<SetAvatar />} />
-        <Route path="/Chat-app/" element={<Chat />} />
+        <Route path="/Chatapp-frontend/register" element={<Register />} />
+        <Route path="/Chatapp-frontend/login" element={<Login />} />
+        <Route path="/Chatapp-frontend/setAvatar" element={<SetAvatar />} />
+        <Route path="/Chatapp-frontend/" element={<Chat />} />
       </Routes>
     </BrowserRouter>
   );

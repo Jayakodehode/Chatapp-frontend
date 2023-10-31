@@ -16,7 +16,7 @@ export default function Register() {
   });
   useEffect(() => {
     if (localStorage.getItem("Chat-app-user")) {
-      navigate("/Chat-app/");
+      navigate("/Chatapp-frontend/");
     }
   }, []);
   const toastOptions = {
@@ -43,7 +43,7 @@ export default function Register() {
           toast.error(data.msg, toastOptions);
         } else if (data.status === true) {
           localStorage.setItem("Chat-app-user", JSON.stringify(data.user));
-          navigate("/Chat-app/"); // Navigate after successful login
+          navigate("/Chatapp-frontend/"); // Navigate after successful login
         }
       }
     } catch (error) {
@@ -118,7 +118,8 @@ export default function Register() {
           />
           <button type="submit">Create User</button>
           <span>
-            Already have an account <Link to="/login">Login</Link>
+            Already have an account{" "}
+            <Link to="Chatapp-frontend/login">Login</Link>
           </span>
         </form>
       </FormContainer>

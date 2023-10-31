@@ -19,7 +19,7 @@ export default function Chat() {
   useEffect(() => {
     const fetchData = async () => {
       if (!localStorage.getItem("Chat-app-user")) {
-        navigate("/Chat-app/login");
+        navigate("/Chatapp-frontend/login");
       } else {
         setCurrentUser(JSON.parse(localStorage.getItem("Chat-app-user")));
         setIsLoaded(true);
@@ -50,7 +50,7 @@ export default function Chat() {
             console.error("Error fetching contacts:", error);
           }
         } else {
-          navigate("/Chat-app/setAvatar");
+          navigate("/Chatapp-frontend/setAvatar");
         }
       }
     };

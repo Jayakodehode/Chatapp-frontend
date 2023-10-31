@@ -36,7 +36,7 @@ export default function Login() {
         } else if (data.status === true) {
           localStorage.setItem("Chat-app-user", JSON.stringify(data.user));
           console.log(data.user);
-          navigate("/Chat-app/"); // Navigate after successful login
+          navigate("/Chatapp-frontend/"); // Navigate after successful login
         }
       } catch (error) {
         console.error("Error:", error);
@@ -83,7 +83,7 @@ export default function Login() {
           <button type="submit">Login</button>
           <span>
             Don't have an account, register here{" "}
-            <Link to="/Chat-app/register">Signup</Link>
+            <Link to="/Chatapp-frontend/register">Signup</Link>
           </span>
         </form>
       </FormContainer>
